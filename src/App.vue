@@ -1,30 +1,44 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <TheHeader />
+  <transition name="page" mode="out-in" appear>
+    <router-view />
+  </transition>
 </template>
 
+<script>
+import TheHeader from "./components/layout/TheHeader.vue";
+export default {
+  components: {
+    TheHeader,
+  },
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #c8e6c9;
+  font-family: sans-serif;
+}
+.page-enter-active {
+  transition: all 0.3s ease-out;
+}
+.page-leave-active {
+  transition: all 0.1s ease-out;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.page-enter-from,
+.page-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+.page-enter-to,
+.page-leave-from {
+  transform: translateY(0px);
+  opacity: 1;
 }
 </style>
